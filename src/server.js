@@ -14,7 +14,7 @@ app.use("/", routes);
 
 app.use((error, request, response, next) => {
     if (error instanceof AppError) {
-        return response.json({
+        return response.status(error.statusCode).json({
             status: error.statusCode,
             message: error.message,
         });
@@ -22,7 +22,7 @@ app.use((error, request, response, next) => {
 
     console.log(error);
 
-    return response.json({
+    return response.status(500).json({
         status: 500,
         message: "Erro interno, por favor contate o administrador!",
     });
