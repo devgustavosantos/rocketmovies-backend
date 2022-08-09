@@ -30,9 +30,11 @@ Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes e
 
 -   O projeto **está em andamento**, por isso é normal que bugs aconteçam.
 
--   Para testar a aplicação, é necessário ter o NodeJS instalado na máquina.;
+-   Para testar a aplicação, é necessário ter o NodeJS e o Insomnia instalados na máquina.;
 
 -   Você pode baixar o NodeJS [clicando aqui](https://nodejs.org/pt-br/download/).
+
+-   Você pode baixar o Insomnia [clicando aqui](https://insomnia.rest/download).
 
 -   A modelagem do banco de dados foi feita por um autor desconhecido.
 
@@ -77,7 +79,10 @@ Abaixo, temos o diagrama usado como base:
 
 ## 💡 Utilização
 
+```
 **Em breve**
+
+```
 
 ## 🤓 Autor
 
