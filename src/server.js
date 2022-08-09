@@ -5,7 +5,6 @@ const AppError = require("./utils/AppError");
 const express = require("express");
 
 const routes = require("./routes");
-const { json } = require("body-parser");
 
 const app = express();
 
