@@ -1,0 +1,31 @@
+{
+    "name": "aplicacao-node",
+    "version": "1.0.0",
+    "description": "Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes em um banco de dados.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/devgustavosantos/aplicacao-node.git"
+    },
+    "keywords": [],
+    "author": "Dev Gustavo Santos",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/devgustavosantos/aplicacao-node/issues"
+    },
+    "homepage": "https://github.com/devgustavosantos/aplicacao-node#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "express": "^4.18.1",
+        "express-async-errors": "^3.1.1",
+        "knex": "^2.2.0",
+        "sqlite": "^4.1.2",
+        "sqlite3": "^5.0.11"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.19"
+    }
+}
