@@ -65,9 +65,9 @@ Abaixo, temos o diagrama usado como base:
 
 ## 🔨 Funcionalidades
 
--   [ ] Cadastrar um usuário;
--   [ ] Atualizar e-mail, senha ou nome de um usuário.
--   [ ] Apagar um usuário.
+-   [x] Cadastrar um usuário;
+-   [x] Atualizar e-mail, senha ou nome de um usuário.
+-   [x] Apagar um usuário.
 -   [ ] Cadastrar um filme;
 -   [ ] Mostrar vários filmes (filtrados por título e/ou tag);
 -   [ ] Mostrar informações de um filme especifico;
