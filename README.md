@@ -68,11 +68,11 @@ Abaixo, temos o diagrama usado como base:
 -   [x] Cadastrar um usuário;
 -   [x] Atualizar e-mail, senha ou nome de um usuário.
 -   [x] Apagar um usuário.
--   [ ] Cadastrar um filme;
--   [ ] Mostrar vários filmes (filtrados por título e/ou tag);
--   [ ] Mostrar informações de um filme especifico;
--   [ ] Atualizar as informações de um filme;
--   [ ] Apagar um filme;
+-   [x] Cadastrar uma anotação de um filme;
+-   [ ] Mostrar vários anotações (filtrados por título e/ou tag);
+-   [ ] Mostrar anotação de um filme especifico;
+-   [ ] Atualizar as anotações de um filme;
+-   [ ] Apagar um anotação;
 -   [ ] Mostrar todas as tags usadas;
 
 </br>
