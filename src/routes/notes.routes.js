@@ -9,6 +9,7 @@ const notesControllers = new NotesControllers();
 routes
     .post("/:user_id", notesControllers.create)
     .delete("/:id", notesControllers.delete)
-    .get("/:id", notesControllers.show);
+    .get("/:id", notesControllers.show)
+    .put("/:id", notesControllers.update);
 
 module.exports = routes;
