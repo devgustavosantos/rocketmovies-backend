@@ -36,17 +36,11 @@ class NotesControllers {
     }
 
     async delete(request, response) {
-        const { id, user_id } = request.params;
-
-        const userInfos = await knex("users").where({ id: user_id }).first();
-
-        dataChecker.userExists(userInfos);
+        const { id } = request.params;
 
         const noteInfos = await knex("notes").where({ id }).first();
 
         dataChecker.noteExist(noteInfos);
-
-        dataChecker.noteBelongsToThisUser(user_id, noteInfos.user_id);
 
         await knex("notes").where({ id }).delete();
 
@@ -57,17 +51,11 @@ class NotesControllers {
     }
 
     async show(request, response) {
-        const { id, user_id } = request.params;
-
-        const userInfos = await knex("users").where({ id: user_id }).first();
-
-        dataChecker.userExists(userInfos);
+        const { id } = request.params;
 
         const noteInfos = await knex("notes").where({ id }).first();
 
         dataChecker.noteExist(noteInfos);
-
-        dataChecker.noteBelongsToThisUser(user_id, noteInfos.user_id);
 
         const tagsOfThisNote = await knex("tags").where({ note_id: id });
 
@@ -76,6 +64,8 @@ class NotesControllers {
             tags: tagsOfThisNote,
         });
     }
+
+    async update(request, response) {}
 }
 
 module.exports = NotesControllers;

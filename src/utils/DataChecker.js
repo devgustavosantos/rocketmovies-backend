@@ -26,16 +26,6 @@ class DataChecker {
             );
         }
     }
-
-    noteBelongsToThisUser(userId, noteId) {
-        const idsMatch = userId == noteId;
-
-        if (!idsMatch) {
-            throw new AppError(
-                "Esta nota não não pertence a este usuário! Verifique as informações e tente novamente."
-            );
-        }
-    }
 }
 
 module.exports = DataChecker;
