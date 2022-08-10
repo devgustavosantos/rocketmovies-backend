@@ -48,7 +48,7 @@ class UserControllers {
         let successfullyUpdated;
         let updatedData = { ...userInfos };
 
-        dataChecker.user(userInfos);
+        dataChecker.userExists(userInfos);
 
         if (new_name) {
             updatedData.name = new_name;
@@ -114,7 +114,7 @@ class UserControllers {
 
         const userInfos = await knex("users").where({ id }).first();
 
-        dataChecker.user(userInfos);
+        dataChecker.userExists(userInfos);
 
         return response.status(200).json(userInfos);
     }
@@ -122,7 +122,7 @@ class UserControllers {
     async index(request, response) {
         const usersInfos = await knex("users");
 
-        dataChecker.users(usersInfos);
+        dataChecker.usersExists(usersInfos);
 
         return response.status(201).json(usersInfos);
     }
@@ -131,6 +131,8 @@ class UserControllers {
         const { id } = request.params;
 
         const userInfos = await knex("users").where({ id }).first();
+
+        dataChecker.userExists(userInfos);
 
         await knex("users").where({ id }).delete();
 

@@ -10,7 +10,7 @@ class NotesControllers {
 
         const userInfos = await knex("users").where({ id: user_id }).first();
 
-        dataChecker.user(userInfos);
+        dataChecker.userExists(userInfos);
 
         const note_id = await knex("notes").insert({
             title,
@@ -32,6 +32,48 @@ class NotesControllers {
         return response.status(201).json({
             status: 201,
             message: "A nota foi cadastrada com sucesso.",
+        });
+    }
+
+    async delete(request, response) {
+        const { id, user_id } = request.params;
+
+        const userInfos = await knex("users").where({ id: user_id }).first();
+
+        dataChecker.userExists(userInfos);
+
+        const noteInfos = await knex("notes").where({ id }).first();
+
+        dataChecker.noteExist(noteInfos);
+
+        dataChecker.noteBelongsToThisUser(user_id, noteInfos.user_id);
+
+        await knex("notes").where({ id }).delete();
+
+        return response.status(201).json({
+            status: 201,
+            message: "A nota foi deletada com sucesso.",
+        });
+    }
+
+    async show(request, response) {
+        const { id, user_id } = request.params;
+
+        const userInfos = await knex("users").where({ id: user_id }).first();
+
+        dataChecker.userExists(userInfos);
+
+        const noteInfos = await knex("notes").where({ id }).first();
+
+        dataChecker.noteExist(noteInfos);
+
+        dataChecker.noteBelongsToThisUser(user_id, noteInfos.user_id);
+
+        const tagsOfThisNote = await knex("tags").where({ note_id: id });
+
+        return response.status(202).json({
+            ...noteInfos,
+            tags: tagsOfThisNote,
         });
     }
 }
