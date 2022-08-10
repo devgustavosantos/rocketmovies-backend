@@ -1,4 +1,6 @@
 const AppError = require("../utils/AppError");
+const DataChecker = require("../utils/DataChecker");
+const dataChecker = new DataChecker();
 const knex = require("../database/knex");
 const { hash, compare } = require("bcryptjs");
 
@@ -46,11 +48,7 @@ class UserControllers {
         let successfullyUpdated;
         let updatedData = { ...userInfos };
 
-        if (!userInfos) {
-            throw new AppError(
-                "Este usuário não está cadastrado! Verifique as informações e tente novamente"
-            );
-        }
+        dataChecker.user(userInfos);
 
         if (new_name) {
             updatedData.name = new_name;
@@ -108,6 +106,37 @@ class UserControllers {
         return response.status(201).json({
             status: 201,
             message: "O dados foram atualizados com sucesso!",
+        });
+    }
+
+    async show(request, response) {
+        const { id } = request.params;
+
+        const userInfos = await knex("users").where({ id }).first();
+
+        dataChecker.user(userInfos);
+
+        return response.status(200).json(userInfos);
+    }
+
+    async index(request, response) {
+        const usersInfos = await knex("users");
+
+        dataChecker.users(usersInfos);
+
+        return response.status(201).json(usersInfos);
+    }
+
+    async delete(request, response) {
+        const { id } = request.params;
+
+        const userInfos = await knex("users").where({ id }).first();
+
+        await knex("users").where({ id }).delete();
+
+        return response.status(202).json({
+            status: 202,
+            message: "O usuário foi excluído com sucesso",
         });
     }
 }
