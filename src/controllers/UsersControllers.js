@@ -26,7 +26,7 @@ class UserControllers {
 
         return response.status(201).json({
             status: 201,
-            message: "O usuário foi cadastrado com sucesso",
+            message: "O usuário foi cadastrado com sucesso!",
         });
     }
 
@@ -121,9 +121,9 @@ class UserControllers {
 
         await knex("users").where({ id }).delete();
 
-        return response.status(202).json({
-            status: 202,
-            message: "O usuário foi excluído com sucesso",
+        return response.status(201).json({
+            status: 201,
+            message: "O usuário foi excluído com sucesso.",
         });
     }
 }

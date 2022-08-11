@@ -4,7 +4,7 @@
     "description": "Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes em um banco de dados.",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npm install && npx knex migrate:latest && node ./src/server.js",
         "dev": "nodemon src/server.js"
     },
     "repository": {
