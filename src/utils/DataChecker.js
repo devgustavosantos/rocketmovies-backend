@@ -51,6 +51,10 @@ class DataChecker {
         if (!isThereAtLeastOneTag)
             throw new AppError("Este usuário não possui tags cadastradas.");
     }
+
+    tagExist(tag) {
+        if (!tag) throw new AppError("Esta tag não está cadastrada.");
+    }
 }
 
 module.exports = DataChecker;

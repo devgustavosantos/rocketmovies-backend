@@ -6,6 +6,8 @@ const routes = Router();
 
 const tagsControllers = new TagsControllers();
 
-routes.get("/:user_id", tagsControllers.index);
+routes
+    .get("/:user_id", tagsControllers.index)
+    .get("/specific/:id", tagsControllers.show);
 
 module.exports = routes;

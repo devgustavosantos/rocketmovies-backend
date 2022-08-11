@@ -16,6 +16,16 @@ class TagsControllers {
 
         return response.status(201).json({ tags: registeredTags });
     }
+
+    async show(request, response) {
+        const { id } = request.params;
+
+        const tagInfos = await knex("tags").where({ id }).first();
+
+        dataChecker.tagExist(tagInfos);
+
+        return response.status(200).json(tagInfos);
+    }
 }
 
 module.exports = TagsControllers;
