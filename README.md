@@ -73,8 +73,10 @@ Abaixo, temos o diagrama usado como base:
 -   [x] Apagar um anotação;
 -   [x] Atualizar as anotações de um filme;
 -   [x] Mostrar várias anotações (filtrados por título, classificação e tag);
--   [ ] Mostrar todas as tags usadas;
--   [ ] Mostrar informações de uma tag especifica.
+-   [x] Mostrar todas as tags usadas;
+-   [x] Mostrar informações de uma tag especifica;
+-   [x] Excluir uma tag;
+-   [x] Atualizar o nome de uma tag.
 
 </br>
 

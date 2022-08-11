@@ -63,6 +63,13 @@ class DataChecker {
 
         this.stringChecker(tag, errorMessage);
     }
+
+    isTheTagEmpty(tag) {
+        const errorMessage =
+            "Não é possível atualizar a tag pois o nome está vazio.";
+
+        this.stringChecker(tag, errorMessage);
+    }
 }
 
 module.exports = DataChecker;

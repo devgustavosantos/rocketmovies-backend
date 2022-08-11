@@ -41,6 +41,27 @@ class TagsControllers {
             message: "A tag foi excluída com sucesso.",
         });
     }
+
+    async update(request, response) {
+        const { id, name } = request.query;
+
+        const tagInfos = await knex("tags").where({ id }).first();
+
+        dataChecker.tagExist(tagInfos);
+
+        dataChecker.isTheTagEmpty(name);
+
+        const formattedName = name.trim();
+
+        await knex("tags").where({ id }).update({
+            name: formattedName,
+        });
+
+        return response.status(201).json({
+            status: 201,
+            message: "A tag foi atualizada com sucesso.",
+        });
+    }
 }
 
 module.exports = TagsControllers;
