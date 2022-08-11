@@ -44,6 +44,13 @@ class DataChecker {
             );
         }
     }
+
+    areThereTagsRegistered(tags) {
+        const isThereAtLeastOneTag = tags.length > 0;
+
+        if (!isThereAtLeastOneTag)
+            throw new AppError("Este usuário não possui tags cadastradas.");
+    }
 }
 
 module.exports = DataChecker;

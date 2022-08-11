@@ -74,6 +74,7 @@ Abaixo, temos o diagrama usado como base:
 -   [x] Atualizar as anotações de um filme;
 -   [x] Mostrar várias anotações (filtrados por título, classificação e tag);
 -   [ ] Mostrar todas as tags usadas;
+-   [ ] Mostrar informações de uma tag especifica.
 
 </br>
 
