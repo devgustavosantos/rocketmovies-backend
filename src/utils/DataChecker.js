@@ -1,30 +1,37 @@
 const AppError = require("./AppError");
 
 class DataChecker {
+    stringChecker(string, message) {
+        const isTheStringEmpty = !string;
+
+        if (isTheStringEmpty) throw new AppError(message);
+    }
+
+    arrayChecker(array, message) {
+        const isTheArrayEmpty = array.length < 1;
+
+        if (isTheArrayEmpty) throw new AppError(message);
+    }
+
     userExists(user) {
-        if (!user) {
-            throw new AppError(
-                "Este usuário não está cadastrado! Verifique as informações e tente novamente."
-            );
-        }
+        const errorMessage =
+            "Este usuário não está cadastrado! Verifique as informações e tente novamente.";
+
+        this.stringChecker(user, errorMessage);
     }
 
     usersExists(usersInfos) {
-        const thereAreRegisteredUsers = usersInfos.length > 0;
+        const errorMessage =
+            "Não há usuários cadastrados! Cadastre um usuário e tente novamente.";
 
-        if (!thereAreRegisteredUsers) {
-            throw new AppError(
-                "Não há usuários cadastrados! Cadastre um usuário e tente novamente."
-            );
-        }
+        this.arrayChecker(usersInfos, errorMessage);
     }
 
     noteExist(note) {
-        if (!note) {
-            throw new AppError(
-                "Esta nota não está cadastrada! Verifique as informações e tente novamente."
-            );
-        }
+        const errorMessage =
+            "Esta nota não está cadastrada! Verifique as informações e tente novamente.";
+
+        this.stringChecker(note, errorMessage);
     }
 
     onlyNumbers(numbers) {
@@ -46,14 +53,15 @@ class DataChecker {
     }
 
     areThereTagsRegistered(tags) {
-        const isThereAtLeastOneTag = tags.length > 0;
+        const errorMessage = "Este usuário não possui tags cadastradas.";
 
-        if (!isThereAtLeastOneTag)
-            throw new AppError("Este usuário não possui tags cadastradas.");
+        this.arrayChecker(tags, errorMessage);
     }
 
     tagExist(tag) {
-        if (!tag) throw new AppError("Esta tag não está cadastrada.");
+        const errorMessage = "Esta tag não está cadastrada.";
+
+        this.stringChecker(tag, errorMessage);
     }
 }
 
