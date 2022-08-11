@@ -71,8 +71,8 @@ Abaixo, temos o diagrama usado como base:
 -   [x] Cadastrar uma anotação de um filme;
 -   [x] Mostrar a anotação de um filme especifico;
 -   [x] Apagar um anotação;
--   [ ] Atualizar as anotações de um filme;
--   [ ] Mostrar vários anotações (filtrados por título e/ou tag);
+-   [x] Atualizar as anotações de um filme;
+-   [x] Mostrar várias anotações (filtrados por título, classificação e tag);
 -   [ ] Mostrar todas as tags usadas;
 
 </br>

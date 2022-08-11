@@ -26,6 +26,24 @@ class DataChecker {
             );
         }
     }
+
+    onlyNumbers(numbers) {
+        const thereIsNotOnlyNumbers = numbers.find(number => isNaN(number));
+
+        if (thereIsNotOnlyNumbers) {
+            throw new AppError(
+                "Somente números são aceitos no campo rating. Tente novamente."
+            );
+        }
+    }
+
+    isANumber(rating) {
+        if (isNaN(rating)) {
+            throw new AppError(
+                "Somente um número é aceito no campo rating. Tente novamente."
+            );
+        }
+    }
 }
 
 module.exports = DataChecker;
