@@ -1,4 +1,3 @@
-const AppError = require("../utils/AppError");
 const DataChecker = require("../utils/DataChecker");
 const dataChecker = new DataChecker();
 const knex = require("../database/knex");
@@ -8,27 +7,20 @@ class UserControllers {
     async create(request, response) {
         const { name, email, password } = request.body;
 
-        const missingData = !name || !email || !password;
+        dataChecker.hasAllDataBeenSent([name, email, password]);
 
-        if (missingData) {
-            throw new AppError(
-                "Dados estão faltando! Verifique as informações e tente novamente."
-            );
-        }
+        const consultEmail = await knex("users").where({ email }).first();
 
-        const consultEmail = await knex("users").where({ email });
-
-        const emailAlreadyRegistered = consultEmail.length > 0;
-
-        if (emailAlreadyRegistered) {
-            throw new AppError("Este email já está registrado! Tente outro.");
-        }
+        dataChecker.emailAlreadyRegistered(consultEmail);
 
         const encryptedPassword = await hash(password, 8);
 
+        const formattedName = name.trim();
+        const formattedEmail = email.trim();
+
         await knex("users").insert({
-            name,
-            email,
+            name: formattedName,
+            email: formattedEmail,
             password: encryptedPassword,
         });
 
@@ -51,7 +43,8 @@ class UserControllers {
         dataChecker.userExists(userInfos);
 
         if (new_name) {
-            updatedData.name = new_name;
+            const formattedName = new_name.trim();
+            updatedData.name = formattedName;
             successfullyUpdated = true;
         }
 
@@ -60,33 +53,23 @@ class UserControllers {
                 .where({ email: new_email })
                 .first();
 
-            if (emailAlreadyRegistered) {
-                throw new AppError(
-                    "Este email já está registrado! Tente outro."
-                );
-            }
+            dataChecker.emailAlreadyRegistered(emailAlreadyRegistered);
 
-            updatedData.email = new_email;
+            const newFormattedEmail = new_email.trim();
+
+            updatedData.email = newFormattedEmail;
             successfullyUpdated = true;
         }
 
         if (new_password) {
-            if (!current_password) {
-                throw new AppError(
-                    "Para cadastrar uma nova senha, é necessário enviar a senha atual! Verifique e tente novamente."
-                );
-            }
+            dataChecker.wasTheCurrentPasswordSent(current_password);
 
-            const currentPasswordIsRight = await compare(
+            const passwordComparison = await compare(
                 current_password,
                 userInfos.password
             );
 
-            if (!currentPasswordIsRight) {
-                throw new AppError(
-                    "A senha atual está incorreta! Verifique e tente novamente."
-                );
-            }
+            dataChecker.doThePasswordsMatch(passwordComparison);
 
             const newPasswordEncrypted = await hash(new_password, 8);
 
@@ -101,12 +84,14 @@ class UserControllers {
                 password: updatedData.password,
                 updated_at: knex.fn.now(),
             });
+
+            return response.status(201).json({
+                status: 201,
+                message: "O dados foram atualizados com sucesso!",
+            });
         }
 
-        return response.status(201).json({
-            status: 201,
-            message: "O dados foram atualizados com sucesso!",
-        });
+        dataChecker.noDataWasSent();
     }
 
     async show(request, response) {

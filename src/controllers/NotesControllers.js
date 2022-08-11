@@ -10,21 +10,26 @@ class NotesControllers {
         const userInfos = await knex("users").where({ id: user_id }).first();
 
         dataChecker.userExists(userInfos);
-
+        dataChecker.isTheTitleOfTheNoteEmpty(title);
         dataChecker.isANumber(rating);
 
+        const formattedTitle = title.trim();
+        const formattedDescription = description.trim();
+
         const note_id = await knex("notes").insert({
-            title,
-            description,
+            title: formattedTitle,
+            description: formattedDescription,
             rating,
             user_id,
         });
 
         const tagsOfThisNote = tags.map(tag => {
+            const formattedTag = tag.trim();
+
             return {
                 note_id,
                 user_id,
-                name: tag,
+                name: formattedTag,
             };
         });
 
@@ -73,17 +78,22 @@ class NotesControllers {
         const noteInfos = await knex("notes").where({ id }).first();
 
         dataChecker.noteExist(noteInfos);
+        dataChecker.isTheTitleOfTheNoteEmpty(title);
 
         let noteHasBeenUpdatedSuccessfully;
         let newNoteInfo = { ...noteInfos };
 
         if (title) {
-            newNoteInfo.title = title;
+            const formattedTitle = title.trim();
+
+            newNoteInfo.title = formattedTitle;
             noteHasBeenUpdatedSuccessfully = true;
         }
 
         if (description) {
-            newNoteInfo.description = description;
+            const formattedDescription = description.trim();
+
+            newNoteInfo.description = formattedDescription;
             noteHasBeenUpdatedSuccessfully = true;
         }
 
@@ -95,10 +105,12 @@ class NotesControllers {
 
         if (tags) {
             const newTagsOfThisNote = tags.map(tag => {
+                const formattedTag = tag.trim();
+
                 return {
                     note_id: id,
                     user_id: noteInfos.user_id,
-                    name: tag,
+                    name: formattedTag,
                 };
             });
 
@@ -253,6 +265,8 @@ class NotesControllers {
                 .where({ user_id })
                 .orderBy("updated_at");
         }
+
+        dataChecker.didTheSearchGetResults(notes);
 
         return response.status(201).json(notes);
     }

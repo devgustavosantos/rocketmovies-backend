@@ -70,6 +70,56 @@ class DataChecker {
 
         this.stringChecker(tag, errorMessage);
     }
+
+    hasAllDataBeenSent(data) {
+        const errorMessage =
+            "Dados estão faltando! Verifique as informações e tente novamente.";
+
+        const missingData = data.every(info => info != false);
+
+        this.stringChecker(missingData, errorMessage);
+    }
+
+    emailAlreadyRegistered(email) {
+        if (email)
+            throw new AppError("Este email já está registrado! Tente outro.");
+    }
+
+    wasTheCurrentPasswordSent(currentPassword) {
+        const errorMessage =
+            "Para cadastrar uma nova senha, é necessário enviar a senha atual! Verifique e tente novamente.";
+
+        this.stringChecker(currentPassword, errorMessage);
+    }
+
+    doThePasswordsMatch(math) {
+        if (!math) {
+            throw new AppError(
+                "A senha atual está incorreta! Verifique e tente novamente."
+            );
+        }
+    }
+
+    isTheTitleOfTheNoteEmpty(title) {
+        const errorMessage =
+            "É obrigatório acrescentar um titulo para cadastrar a nota!";
+
+        this.stringChecker(title, errorMessage);
+    }
+
+    didTheSearchGetResults(search) {
+        const errorMessage =
+            "A busca não teve resultados. Verifique os filtros e tente novamente.";
+
+        this.arrayChecker(search, errorMessage);
+    }
+
+    noDataWasSent() {
+        const errorMessage =
+            "Para atualizar as informações, é necessário envia ao menos um dado.";
+
+        this.stringChecker(undefined, errorMessage);
+    }
 }
 
 module.exports = DataChecker;
