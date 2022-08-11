@@ -1,4 +1,4 @@
-# 🎬 Aplicação Node
+# :movie_camera: Aplicação Node
 
 Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes em um banco de dados.
 
@@ -6,19 +6,19 @@ Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes e
     <img src="./src/assets/images/node.jpg" alt="Capa do projeto">
 </h1>
 
-## 📖 Sumário
+## :open_book: Sumário
 
--   [Pré-Visualização](#🎬pré-visualização)
--   [Aviso](#📢aviso)
--   [Sobre](#📝sobre)
--   [Tecnologias](#💾tecnologias)
--   [Funcionalidades](#🔨funcionalidades)
--   [Utilização](#💡utilização)
--   [Autor](#🤓autor)
+-   [Pré-Visualização](#clapper-pré-visualização)
+-   [Aviso](#loudspeaker-aviso)
+-   [Sobre](#memo-sobre)
+-   [Tecnologias](#floppy_disk-tecnologias)
+-   [Funcionalidades](#hammer-funcionalidades)
+-   [Utilização](#bulb-utilização)
+-   [Autor](#nerd_face-autor)
 
 </br>
 
-## 🎬Pré-Visualização
+## :clapper: Pré-Visualização
 
 <h1 align="center">
     <img src="./src/assets/images/place-holder.jpg" alt="gif da versão desktop">
@@ -26,7 +26,7 @@ Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes e
 
 </br>
 
-## 📢Aviso
+## :loudspeaker: Aviso
 
 -   O projeto **está em andamento**, por isso é normal que bugs aconteçam.
 
@@ -40,7 +40,7 @@ Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes e
 
 </br>
 
-## 📝Sobre
+## :memo: Sobre
 
 Este é um dos projetos propostos no programa [Explorer da Rocketseat](https://www.rocketseat.com.br/explorer), os [detalhes estão aqui](https://efficient-sloth-d85.notion.site/Aplica-o-em-Node-57bd49ae77b3422fad74f8dde0d06fef), mas basicamente é uma aplicação que guarda, mostra, edita e apaga(CRUD) informações de um filme (enviadas pelo usuário) em um Banco de Dados Relacional.
 
@@ -52,7 +52,7 @@ Abaixo, temos o diagrama usado como base:
 
 </br>
 
-## 💾Tecnologias
+## :floppy_disk: Tecnologias
 
 -   **JS** - usado para fazer toda a lógica da aplicação;
 -   **NodeJs** - utilizado para executar o JS fora do navegador;
@@ -63,7 +63,7 @@ Abaixo, temos o diagrama usado como base:
 
 </br>
 
-## 🔨Funcionalidades
+## :hammer: Funcionalidades
 
 -   [x] Cadastrar um usuário;
 -   [x] Atualizar e-mail, senha ou nome de um usuário.
@@ -80,7 +80,7 @@ Abaixo, temos o diagrama usado como base:
 
 </br>
 
-## 💡Utilização
+## :bulb: Utilização
 
 -   [Iniciando a aplicação](#iniciando-a-aplicação)
 -   [Usando os recursos](#usando-os-recursos)
@@ -274,6 +274,6 @@ Para iniciar a aplicação, é necessário:
 
 ```
 
-## 🤓Autor
+## :nerd_face: Autor
 
-Feito com ❤ por Dev Gustavo Santos 😀 Veja meu [LinkedIn.](https://www.linkedin.com/in/devgustavosantos/)
+Feito com :heart: por Dev Gustavo Santos :grinning: Veja meu [LinkedIn.](https://www.linkedin.com/in/devgustavosantos/)
