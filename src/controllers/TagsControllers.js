@@ -26,6 +26,21 @@ class TagsControllers {
 
         return response.status(200).json(tagInfos);
     }
+
+    async delete(request, response) {
+        const { id } = request.params;
+
+        const tagInfos = await knex("tags").where({ id }).first();
+
+        dataChecker.tagExist(tagInfos);
+
+        await knex("tags").where({ id }).delete();
+
+        return response.status(201).json({
+            status: 201,
+            message: "A tag foi excluída com sucesso.",
+        });
+    }
 }
 
 module.exports = TagsControllers;
