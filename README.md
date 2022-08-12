@@ -21,14 +21,14 @@ Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes e
 ## :clapper: Pré-Visualização
 
 <h1 align="center">
-    <img src="./src/assets/images/place-holder.jpg" alt="gif da versão desktop">
+    <img src="./src/assets/images/preview.gif" alt="gif da versão desktop">
 </h1>
 
 </br>
 
 ## :loudspeaker: Aviso
 
--   O projeto **está em andamento**, por isso é normal que bugs aconteçam.
+-   A primeira versão do projeto **está finalizada**.
 
 -   Para testar a aplicação, é necessário ter o NodeJS e o Insomnia (ou equivalente) instalados na máquina.;
 

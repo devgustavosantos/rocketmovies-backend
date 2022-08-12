@@ -245,7 +245,6 @@ class NotesControllers {
         }
 
         if (queryType.tagOnly) {
-            console.log("chegou aqui");
             notes = await knex("tags")
                 .select([
                     "notes.id",
