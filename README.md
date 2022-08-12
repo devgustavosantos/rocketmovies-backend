@@ -93,13 +93,14 @@ Abaixo, temos o diagrama usado como base:
     -   [Notas](#notas)
         -   [Criar](#criar-uma-nota)
         -   [Atualizar](#atualizar-uma-nota)
+        -   [Excluir](#excluir-uma-nota)
         -   [Mostrar Especifica](#mostrar-uma-nota)
         -   [Mostrar Várias](#mostrar-várias-notas)
-    -   [Tags]()
-        -   [Criar]()
-        -   [Atualizar]()
-        -   [Mostrar Especifica]()
-        -   [Mostrar Todas]()
+    -   [Tags](#tags)
+        -   [Atualizar](#atualizar-uma-tag)
+        -   [Excluir](#excluir-uma-tag)
+        -   [Mostrar Especifica](#mostrar-uma-tag)
+        -   [Mostrar Todas](#mostrar-todas-tags)
 
 ---
 
@@ -334,6 +335,25 @@ Para iniciar a aplicação, é necessário:
             }
         ```
 
+    -   ##### **Excluir uma Nota**
+
+        Para excluir uma nota nós usaremos o recurso "notes", junto com o id da nota que será excluída. A URL ficará assim:
+
+        `http://localhost:3333/notes/1`
+
+        _OBS: `1` é o numero do id da nota que será excluída._
+
+        A requisição terá que ser feita com o método `DELETE`.
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+            {
+                "status": 201,
+                "message": "A nota foi deletada com sucesso."
+            }
+        ```
+
     -   ##### **Mostrar uma Nota**
 
         Para mostrar as informações de uma nota nós usaremos o recurso "notes", junto com o id da nota que será exibida. A URL ficará assim:
@@ -398,7 +418,7 @@ Para iniciar a aplicação, é necessário:
 
         A URL ficará assim:
 
-        `http://localhost:3333/notes/?title=Nome%20do%20Filme&rating=8&tags=A%C3%A7%C3%A3o&user_id=16`
+        `http://localhost:3333/notes/?title=nome&rating=8&tags=romance&user_id=16`
 
         A requisição terá que ser feita com o método `GET`.
 
@@ -437,6 +457,113 @@ Para iniciar a aplicação, é necessário:
         ```
 
 ---
+
+-   #### **TAGS**
+
+    -   ##### **Atualizar uma Tag**
+
+        Para atualizar uma tag nós usaremos o recurso "tags/specific", e para esse recurso também será necessário o envio dos parâmetros através de query (Query Params).
+
+        Estes serão os parâmetros:
+
+        -   `id` : será usada para buscar as tag que será atualizada.
+
+        -   `name` : será o novo nome da tag.
+
+        A URL ficará assim:
+
+        `http://localhost:3333/tags/specific/?id=10&name=vingadores`
+
+        A requisição terá que ser feita com o método `PUT`.
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+            {
+                "status": 201,
+                "message": "A tag foi atualizada com sucesso."
+            }
+        ```
+
+    -   ##### **Excluir uma Tag**
+
+        Para excluir uma tag nós usaremos o recurso "tags/specific", junto com o id da tag que será excluída. A URL ficará assim:
+
+        `http://localhost:3333/tag/specific/1`
+
+        _OBS: `1` é o numero do id da tag que será excluída._
+
+        A requisição terá que ser feita com o método `DELETE`.
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+            {
+                "status": 201,
+                "message": "A tag foi excluída com sucesso."
+            }
+        ```
+
+    -   ##### **Mostrar uma Tag**
+
+        Para mostrar as informações de uma tag nós usaremos o recurso "tags/specific", junto com o id da tag que será exibida. A URL ficará assim:
+
+        `http://localhost:3333/tags/specific/1`
+
+        _OBS: `1` é o numero do id da tag que será exibida._
+
+        A requisição terá que ser feita com o método `GET`.
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+                {
+                    "id": 121,
+                    "note_id": 33,
+                    "user_id": 15,
+                    "name": "Ação"
+                }
+        ```
+
+    -   ##### **Mostrar todas Tags**
+
+        Para mostrar todas tags nós usaremos o recurso "tags", junto ao id do usuário ao qual elas pertencem . A URL ficará assim:
+
+        `http://localhost:3333/tags/1`
+
+        _OBS: `1` é o numero do id do usuário que é dono dessas tags._
+
+        A requisição terá que ser feita com o método `GET`.
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+            {
+                "tags": [
+                    {
+                        "id": 1,
+                        "note_id": 1,
+                        "user_id": 1,
+                        "name": "Ação"
+                    },
+                    {
+                        "id": 2,
+                        "note_id": 1,
+                        "user_id": 1,
+                        "name": "Aventura"
+                    },
+                    {
+                        "id": 3,
+                        "note_id": 1,
+                        "user_id": 1,
+                        "name": "Romance"
+                    }
+            }
+        ```
+
+---
+
+_Esses são os recursos disponíveis nessa Aplicação, se algum recurso não funcionar como o esperado, verifique essa documentação e tente novamente, mas caso precista, por favor mande um e-mail para [devgustavosantos@outlook.com](mailto:devgustavosantos@outlook.com)._
 
 ## :nerd_face: Autor
 
