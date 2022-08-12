@@ -84,17 +84,17 @@ Abaixo, temos o diagrama usado como base:
 
 -   [Iniciando a aplicação](#iniciando-a-aplicação)
 -   [Usando os recursos](#usando-os-recursos)
-    -   [Usuários](#iniciando-a-aplicação)
+    -   [Usuários](#usuários)
         -   [Criar](#criar-um-usuário)
         -   [Atualizar](#atualizar-um-usuário)
-        -   [Excluir]()
-        -   [Mostrar Especifico]()
-        -   [Mostrar Todos]()
-    -   [Notas]()
-        -   [Criar]()
-        -   [Atualizar]()
-        -   [Mostrar Especifica]()
-        -   [Mostrar Todas]()
+        -   [Excluir](#excluir-um-usuário)
+        -   [Mostrar Especifico](#mostrar-um-usuário)
+        -   [Mostrar Todos](#mostrar-todos-usuários)
+    -   [Notas](#notas)
+        -   [Criar](#criar-uma-nota)
+        -   [Atualizar](#atualizar-uma-nota)
+        -   [Mostrar Especifica](#mostrar-uma-nota)
+        -   [Mostrar Várias](#mostrar-várias-notas)
     -   [Tags]()
         -   [Criar]()
         -   [Atualizar]()
@@ -107,7 +107,8 @@ Abaixo, temos o diagrama usado como base:
 
 Para iniciar a aplicação, é necessário:
 
--   Abrir o diretório aonde ela esta salva.
+-   Baixar ou clonar o repositório em sua maquina.
+-   Abrir o diretório aonde ele esta salvo.
 -   Abrir o terminal nesse diretório.
 -   Executar o seguinte comando:
     ```bash
@@ -121,7 +122,9 @@ Para iniciar a aplicação, é necessário:
 
 -   Para utilizar todo dos recursos desta API, vamos utilizar a seguinte URL base:
 
-    `localhost:3333`
+    `http://localhost:3333`
+
+-   E para fazer as requisições usaremos o Insomnia.
 
 ---
 
@@ -133,7 +136,7 @@ Para iniciar a aplicação, é necessário:
 
         Para criar um usuário nós usaremos o recurso "users", a URL ficará assim:
 
-        `localhost:3333/users`
+        `http://localhost:3333/users`
 
         A requisição terá que ser feita com o método `POST`, utilizando JSON com o seguinte padrão:
 
@@ -158,7 +161,7 @@ Para iniciar a aplicação, é necessário:
 
         Para atualizar um usuário nós usaremos o recurso "users", junto com o id do usuário que será atualizado. A URL ficará assim:
 
-        `localhost:3333/users/1`
+        `http://localhost:3333/users/1`
 
         _OBS: `1` é o numero do id do usuário que será atualizado._
 
@@ -188,7 +191,7 @@ Para iniciar a aplicação, é necessário:
 
         Para excluir um usuário nós usaremos o recurso "users", junto com o id do usuário que será excluído. A URL ficará assim:
 
-        `localhost:3333/users/1`
+        `http://localhost:3333/users/1`
 
         _OBS: `1` é o numero do id do usuário que será excluído._
 
@@ -207,7 +210,7 @@ Para iniciar a aplicação, é necessário:
 
         Para mostrar um usuário nós usaremos o recurso "users", junto com o id do usuário que será exibido. A URL ficará assim:
 
-        `localhost:3333/users/1`
+        `http://localhost:3333/users/1`
 
         _OBS: `1` é o numero do id do usuário que será exibido._
 
@@ -231,7 +234,7 @@ Para iniciar a aplicação, é necessário:
 
         Para mostrar todos os usuário nós usaremos o recurso "users" . A URL ficará assim:
 
-        `localhost:3333/users/`
+        `http://localhost:3333/users/`
 
         A requisição terá que ser feita com o método `GET`.
 
@@ -269,10 +272,171 @@ Para iniciar a aplicação, é necessário:
             ]
         ```
 
-```
-**Em breve**
+---
 
-```
+-   #### **NOTAS**
+
+    -   ##### **Criar uma Nota**
+
+        Para criar uma nota nós usaremos o recurso "notes", passando o id do aa URL ficará assim:
+
+        `http://localhost:3333/notes/1`
+
+        _OBS: `1` é o numero do id do usuário que será atualizado._
+
+        A requisição terá que ser feita com o método `POST`, utilizando JSON com o seguinte padrão:
+
+        ```JSON
+            {
+                "title": "Filme 1",
+                "description": "A descrição do filme aqui.",
+                "rating": 10,
+                "tags": ["Ação", "Aventura", "Romance"]
+            }
+        ```
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+            {
+                "status": 201,
+                "message": "A nota foi cadastrada com sucesso."
+            }
+        ```
+
+    -   ##### **Atualizar uma Nota**
+
+        Para atualizar uma nota nós usaremos o recurso "notes", junto com o id da nota que será atualizada. A URL ficará assim:
+
+        `http://localhost:3333/notes/1`
+
+        _OBS: `1` é o numero do id da nota que será atualizada._
+
+        A requisição terá que ser feita com o método `PUT`, utilizando JSON com o seguinte padrão:
+
+        ```JSON
+            {
+                "title": "Filme 1",
+                "description": "A descrição do filme aqui.",
+                "rating": 10,
+                "tags": ["Ação", "Aventura", "Romance"]
+            }
+        ```
+
+        **ATENÇÃO**: apenas as informações que forem enviadas serão atualizadas.
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+            {
+                "status": 201,
+                "message": "A nota foi atualizada com sucesso."
+            }
+        ```
+
+    -   ##### **Mostrar uma Nota**
+
+        Para mostrar as informações de uma nota nós usaremos o recurso "notes", junto com o id da nota que será exibida. A URL ficará assim:
+
+        `http://localhost:3333/notes/1`
+
+        _OBS: `1` é o numero do id da nota que será exibida._
+
+        A requisição terá que ser feita com o método `GET`.
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+            {
+                "id": 1,
+                "title": "Filme 1",
+                "description": "Descrição do filme.",
+                "rating": 10,
+                "user_id": 1,
+                "created_at": "2022-08-11 14:58:01",
+                "updated_at": "2022-08-11 14:59:48",
+                "tags": [
+                    {
+                        "id": 1,
+                        "note_id": 1,
+                        "user_id": 1,
+                        "name": "Ação"
+                    },
+                    {
+                        "id": 2,
+                        "note_id": 1,
+                        "user_id": 1,
+                        "name": "Aventura"
+                    },
+                    {
+                        "id": 3,
+                        "note_id": 1,
+                        "user_id": 1,
+                        "name": "Romance"
+                    }
+                ]
+            }
+        ```
+
+    -   ##### **Mostrar várias Notas**
+
+        Para mostrar todas as notas de um usuário e com a possibilidade de colocar filtros, nós usaremos o recurso "notes".
+
+        Dessa vez os parâmetros terão que ser enviados por Query (query params).
+
+        Nós teremos os seguintes parâmetros:
+
+        -   `user_id` : **obrigatório** pois será usado para encontrar as notas daquele usuário.
+
+        -   `title` : será usada para buscar as notas que contenham esse titulo;
+
+        -   `rating` : será usada para buscar as notas que contenham apenas aquela nota.
+
+        -   `tags`: será usada para buscar as notas que contenham apenas aquelas tags, respeitando letrar maiúsculas e minusculas.
+
+        Os filtros podem ser usados juntos ou separados, mas é **OBRIGATÓRIO** o envio do `user_id`.
+
+        A URL ficará assim:
+
+        `http://localhost:3333/notes/?title=Nome%20do%20Filme&rating=8&tags=A%C3%A7%C3%A3o&user_id=16`
+
+        A requisição terá que ser feita com o método `GET`.
+
+        Se tudo der certo, você deverá receber a seguinte resposta:
+
+        ```JSON
+            [
+                {
+                    "id": 1,
+                    "name": "Nome do Usuário 1",
+                    "email": "usuario10@email.comm",
+                    "password": "$2a$08$hSxSbmALQN6sL9CY0Xok4u6Qqdp/xP/9NXGBtjpg7Pm.ljGgpAaX6",
+                    "avatar": null,
+                    "created_at": "2022-08-10 18:42:38",
+                    "updated_at": "2022-08-11 14:10:01"
+                },
+                {
+                    "id": 2,
+                    "name": "Nome do Usuário 2",
+                    "email": "usuario2@email.com",
+                    "password": "$2a$08$n31FWj4lH2ary/yYfCytQOGk.RR/X5J1x6n0ALGfWkkvg8Xc4PXxG",
+                    "avatar": null,
+                    "created_at": "2022-08-11 13:37:34",
+                    "updated_at": "2022-08-11 13:37:34"
+                },
+                {
+                    "id": 3,
+                    "name": "Nome do Usuário 3",
+                    "email": "usuario3@email.com",
+                    "password": "$2a$08$cg1hY1GMK.QSgQMPh94doeH2yWt2ObFvi9W976VneMnyJ4UmZtKsC",
+                    "avatar": null,
+                    "created_at": "2022-08-11 13:46:05",
+                    "updated_at": "2022-08-11 13:46:05"
+                }
+            ]
+        ```
+
+---
 
 ## :nerd_face: Autor
 

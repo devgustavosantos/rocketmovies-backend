@@ -78,7 +78,6 @@ class NotesControllers {
         const noteInfos = await knex("notes").where({ id }).first();
 
         dataChecker.noteExist(noteInfos);
-        dataChecker.isTheTitleOfTheNoteEmpty(title);
 
         let noteHasBeenUpdatedSuccessfully;
         let newNoteInfo = { ...noteInfos };
@@ -129,17 +128,17 @@ class NotesControllers {
                 updated_at: knex.fn.now(),
             });
 
-            return response.status(200).json({
+            return response.status(201).json({
                 status: 200,
                 message: "A nota foi atualizada com sucesso.",
             });
-        } else {
-            return response.status(400).json({
-                status: 400,
-                message: `É necessário ao menos uma informação para atualizar!
-                    Por favor verifique e tente novamente.`,
-            });
         }
+
+        return response.status(400).json({
+            status: 400,
+            message: `É necessário ao menos uma informação para atualizar!
+                    Por favor verifique e tente novamente.`,
+        });
     }
 
     async index(request, response) {
