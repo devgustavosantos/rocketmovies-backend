@@ -1,4 +1,4 @@
-# :movie_camera: Aplicação Node
+# :movie_camera: Rocketmovies Backend
 
 Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes em um banco de dados.
 
