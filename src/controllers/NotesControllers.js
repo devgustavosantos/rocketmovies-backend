@@ -7,9 +7,6 @@ class NotesControllers {
     const user_id = request.user.id;
     const { title, description, rating, tags } = request.body;
 
-    const userInfos = await knex("users").where({ id: user_id }).first();
-
-    dataChecker.userExists(userInfos);
     dataChecker.isTheTitleOfTheNoteEmpty(title);
     dataChecker.isANumber(rating);
 
@@ -72,7 +69,8 @@ class NotesControllers {
   }
 
   async index(request, response) {
-    const { user_id, title, rating, tags } = request.query;
+    const { title, rating, tags } = request.query;
+    const user_id = request.user.id;
 
     const userInfos = await knex("users").where({ id: user_id }).first();
 
