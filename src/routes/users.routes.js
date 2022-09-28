@@ -6,6 +6,8 @@ const usersControllers = new UserControllers();
 
 const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 
-routes.post("/", usersControllers.create).put("/:id", usersControllers.update);
+routes
+  .post("/", usersControllers.create)
+  .put("/", ensureAuthenticated, usersControllers.update);
 
 module.exports = routes;

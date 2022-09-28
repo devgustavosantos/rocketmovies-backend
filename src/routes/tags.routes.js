@@ -1,15 +1,11 @@
 const { Router } = require("express");
-
-const TagsControllers = require("../controllers/TagsControllers");
-
 const routes = Router();
 
+const TagsControllers = require("../controllers/TagsControllers");
 const tagsControllers = new TagsControllers();
 
-routes
-    .get("/:user_id", tagsControllers.index)
-    .get("/specific/:id", tagsControllers.show)
-    .delete("/specific/:id", tagsControllers.delete)
-    .put("/specific", tagsControllers.update);
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+
+routes.get("/", ensureAuthenticated, tagsControllers.index);
 
 module.exports = routes;

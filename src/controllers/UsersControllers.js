@@ -31,11 +31,13 @@ class UserControllers {
   }
 
   async update(request, response) {
-    const { id } = request.params;
+    const user_id = request.user.id;
     const { new_name, new_email, new_password, current_password } =
       request.body;
 
-    const userInfos = await knex("users").where({ id }).first();
+    console.log(new_name, new_email, new_password, current_password);
+
+    const userInfos = await knex("users").where({ id: user_id }).first();
 
     let successfullyUpdated;
     let updatedData = { ...userInfos };
@@ -78,7 +80,7 @@ class UserControllers {
     }
 
     if (successfullyUpdated) {
-      await knex("users").where({ id }).update({
+      await knex("users").where({ id: user_id }).update({
         name: updatedData.name,
         email: updatedData.email,
         password: updatedData.password,
