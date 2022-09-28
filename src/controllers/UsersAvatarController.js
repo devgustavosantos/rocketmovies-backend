@@ -20,7 +20,13 @@ class UsersAvatarController {
 
     await knex("users").where({ id: user_id }).update(user);
 
-    return response.json(user);
+    const onlyNecessaryInformation = {
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+    };
+
+    return response.json({ user: onlyNecessaryInformation });
   }
 }
 

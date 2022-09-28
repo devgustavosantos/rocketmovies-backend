@@ -33,7 +33,7 @@ class SessionsControllers {
       avatar: user.avatar,
     };
 
-    return response.json({ onlyNecessaryInformation, token });
+    return response.json({ user: onlyNecessaryInformation, token });
   }
 }
 
