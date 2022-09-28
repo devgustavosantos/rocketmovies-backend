@@ -4,128 +4,95 @@ const knex = require("../database/knex");
 const { hash, compare } = require("bcryptjs");
 
 class UserControllers {
-    async create(request, response) {
-        const { name, email, password } = request.body;
+  async create(request, response) {
+    const { name, email, password } = request.body;
 
-        dataChecker.hasAllDataBeenSent([name, email, password]);
+    dataChecker.hasAllDataBeenSent([name, email, password]);
 
-        const consultEmail = await knex("users").where({ email }).first();
+    const consultEmail = await knex("users").where({ email }).first();
 
-        dataChecker.emailAlreadyRegistered(consultEmail);
+    dataChecker.emailAlreadyRegistered(consultEmail);
 
-        const encryptedPassword = await hash(password, 8);
+    const encryptedPassword = await hash(password, 8);
 
-        const formattedName = name.trim();
-        const formattedEmail = email.trim();
+    const formattedName = name.trim();
+    const formattedEmail = email.trim();
 
-        await knex("users").insert({
-            name: formattedName,
-            email: formattedEmail,
-            password: encryptedPassword,
-        });
+    await knex("users").insert({
+      name: formattedName,
+      email: formattedEmail,
+      password: encryptedPassword,
+    });
 
-        return response.status(201).json({
-            status: 201,
-            message: "O usuário foi cadastrado com sucesso!",
-        });
+    return response.status(201).json({
+      status: 201,
+      message: "O usuário foi cadastrado com sucesso!",
+    });
+  }
+
+  async update(request, response) {
+    const { id } = request.params;
+    const { new_name, new_email, new_password, current_password } =
+      request.body;
+
+    const userInfos = await knex("users").where({ id }).first();
+
+    let successfullyUpdated;
+    let updatedData = { ...userInfos };
+
+    dataChecker.userExists(userInfos);
+
+    if (new_name) {
+      const formattedName = new_name.trim();
+      updatedData.name = formattedName;
+      successfullyUpdated = true;
     }
 
-    async update(request, response) {
-        const { id } = request.params;
-        const { new_name, new_email, new_password, current_password } =
-            request.body;
+    if (new_email) {
+      const emailAlreadyRegistered = await knex("users")
+        .where({ email: new_email })
+        .first();
 
-        const userInfos = await knex("users").where({ id }).first();
+      dataChecker.emailAlreadyRegistered(emailAlreadyRegistered);
 
-        let successfullyUpdated;
-        let updatedData = { ...userInfos };
+      const newFormattedEmail = new_email.trim();
 
-        dataChecker.userExists(userInfos);
-
-        if (new_name) {
-            const formattedName = new_name.trim();
-            updatedData.name = formattedName;
-            successfullyUpdated = true;
-        }
-
-        if (new_email) {
-            const emailAlreadyRegistered = await knex("users")
-                .where({ email: new_email })
-                .first();
-
-            dataChecker.emailAlreadyRegistered(emailAlreadyRegistered);
-
-            const newFormattedEmail = new_email.trim();
-
-            updatedData.email = newFormattedEmail;
-            successfullyUpdated = true;
-        }
-
-        if (new_password) {
-            dataChecker.wasTheCurrentPasswordSent(current_password);
-
-            const passwordComparison = await compare(
-                current_password,
-                userInfos.password
-            );
-
-            dataChecker.doThePasswordsMatch(passwordComparison);
-
-            const newPasswordEncrypted = await hash(new_password, 8);
-
-            updatedData.password = newPasswordEncrypted;
-            successfullyUpdated = true;
-        }
-
-        if (successfullyUpdated) {
-            await knex("users").where({ id }).update({
-                name: updatedData.name,
-                email: updatedData.email,
-                password: updatedData.password,
-                updated_at: knex.fn.now(),
-            });
-
-            return response.status(201).json({
-                status: 201,
-                message: "O dados foram atualizados com sucesso!",
-            });
-        }
-
-        dataChecker.noDataWasSent();
+      updatedData.email = newFormattedEmail;
+      successfullyUpdated = true;
     }
 
-    async show(request, response) {
-        const { id } = request.params;
+    if (new_password) {
+      dataChecker.wasTheCurrentPasswordSent(current_password);
 
-        const userInfos = await knex("users").where({ id }).first();
+      const passwordComparison = await compare(
+        current_password,
+        userInfos.password
+      );
 
-        dataChecker.userExists(userInfos);
+      dataChecker.doThePasswordsMatch(passwordComparison);
 
-        return response.status(200).json(userInfos);
+      const newPasswordEncrypted = await hash(new_password, 8);
+
+      updatedData.password = newPasswordEncrypted;
+      successfullyUpdated = true;
     }
 
-    async index(request, response) {
-        const usersInfos = await knex("users");
+    if (successfullyUpdated) {
+      await knex("users").where({ id }).update({
+        name: updatedData.name,
+        email: updatedData.email,
+        password: updatedData.password,
+        updated_at: knex.fn.now(),
+      });
 
-        dataChecker.usersExists(usersInfos);
-
-        return response.status(201).json(usersInfos);
+      return response.status(201).json({
+        status: 201,
+        message: "O dados foram atualizados com sucesso!",
+      });
     }
 
-    async delete(request, response) {
-        const { id } = request.params;
-
-        const userInfos = await knex("users").where({ id }).first();
-
-        dataChecker.userExists(userInfos);
-
-        await knex("users").where({ id }).delete();
-
-        return response.status(201).json({
-            status: 201,
-            message: "O usuário foi excluído com sucesso.",
-        });
-    }
+    dataChecker.noDataWasSent();
+  }
 }
 
 module.exports = UserControllers;
