@@ -85,9 +85,16 @@ class DataChecker {
       throw new AppError("Este email já está registrado! Tente outro.");
   }
 
+  doesThisEmailBelongToThisUser(user, email) {
+    if (user.id !== email.id) {
+      throw new AppError(
+        "Este email já está registrado por outro usuário! Tente outro."
+      );
+    }
+  }
+
   wasTheCurrentPasswordSent(currentPassword) {
-    const errorMessage =
-      "Para cadastrar uma nova senha, é necessário enviar a senha atual! Verifique e tente novamente.";
+    const errorMessage = `Para cadastrar uma nova senha, é necessário enviar a senha atual! Verifique e tente novamente.`;
 
     this.stringChecker(currentPassword, errorMessage);
   }

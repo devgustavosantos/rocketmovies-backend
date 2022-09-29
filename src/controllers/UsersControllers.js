@@ -32,10 +32,12 @@ class UserControllers {
 
   async update(request, response) {
     const user_id = request.user.id;
-    const { new_name, new_email, new_password, current_password } =
-      request.body;
-
-    console.log(new_name, new_email, new_password, current_password);
+    const {
+      new_name,
+      new_email,
+      new_password,
+      current_password,
+    } = request.body;
 
     const userInfos = await knex("users").where({ id: user_id }).first();
 
@@ -55,7 +57,10 @@ class UserControllers {
         .where({ email: new_email })
         .first();
 
-      dataChecker.emailAlreadyRegistered(emailAlreadyRegistered);
+      dataChecker.doesThisEmailBelongToThisUser(
+        userInfos,
+        emailAlreadyRegistered
+      );
 
       const newFormattedEmail = new_email.trim();
 
@@ -87,10 +92,13 @@ class UserControllers {
         updated_at: knex.fn.now(),
       });
 
-      return response.status(201).json({
-        status: 201,
-        message: "O dados foram atualizados com sucesso!",
-      });
+      const updatedUser = {
+        name: updatedData.name,
+        email: updatedData.email,
+        avatar: updatedData.avatar,
+      };
+
+      return response.status(201).json(updatedUser);
     }
 
     dataChecker.noDataWasSent();
