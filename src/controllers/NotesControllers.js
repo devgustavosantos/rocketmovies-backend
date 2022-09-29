@@ -90,8 +90,6 @@ class NotesControllers {
       };
     });
 
-    dataChecker.didTheSearchGetResults(notes);
-
     return response.status(201).json(notesWithTags);
   }
 }
