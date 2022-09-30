@@ -1,36 +1,37 @@
 {
-    "name": "aplicacao-node",
-    "version": "1.0.0",
-    "description": "Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes em um banco de dados.",
-    "main": "index.js",
-    "scripts": {
-        "start": "npm install && npx knex migrate:latest && node ./src/server.js",
-        "dev": "nodemon src/server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/devgustavosantos/aplicacao-node.git"
-    },
-    "keywords": [],
-    "author": "Dev Gustavo Santos",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/devgustavosantos/aplicacao-node/issues"
-    },
-    "homepage": "https://github.com/devgustavosantos/aplicacao-node#readme",
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "cors": "^2.8.5",
-        "dotenv": "^16.0.3",
-        "express": "^4.18.1",
-        "express-async-errors": "^3.1.1",
-        "jsonwebtoken": "^8.5.1",
-        "knex": "^2.2.0",
-        "multer": "^1.4.5-lts.1",
-        "sqlite": "^4.1.2",
-        "sqlite3": "^5.0.11"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.19"
-    }
+  "name": "rocketnotes-backend",
+  "version": "1.0.0",
+  "description": "Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes em um banco de dados.",
+  "main": "index.js",
+  "scripts": {
+    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devgustavosantos/aplicacao-node.git"
+  },
+  "keywords": [],
+  "author": "Dev Gustavo Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devgustavosantos/aplicacao-node/issues"
+  },
+  "homepage": "https://github.com/devgustavosantos/aplicacao-node#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^2.2.0",
+    "multer": "^1.4.5-lts.1",
+    "pm2": "^5.2.0",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.0.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
 }
