@@ -26,7 +26,7 @@ class UsersAvatarController {
       avatar: user.avatar,
     };
 
-    return response.json({ user: onlyNecessaryInformation });
+    return response.json(onlyNecessaryInformation);
   }
 }
 
