@@ -4,7 +4,7 @@
   "description": "Esse projeto é uma aplicação para guardar, mostrar, editar e deletar filmes em um banco de dados.",
   "main": "index.js",
   "scripts": {
-    "start": "npm install && npx knex migrate:latest && pm2-runtime start ecosystem.config.js --env production",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "dev": "nodemon src/server.js"
   },
   "repository": {
