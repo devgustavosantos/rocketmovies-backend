@@ -9,6 +9,7 @@ const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 routes.use(ensureAuthenticated);
 routes
   .post("/", notesControllers.create)
+  .put("/:id", notesControllers.update)
   .delete("/:id", notesControllers.delete)
   .get("/:id", notesControllers.show)
   .get("/", notesControllers.index);

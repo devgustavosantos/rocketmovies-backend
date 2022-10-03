@@ -20,7 +20,7 @@ class NotesControllers {
       user_id,
     });
 
-    const tagsOfThisNote = tags.map((tag) => {
+    const tagsOfThisNote = tags.map(tag => {
       const formattedTag = tag.trim();
 
       return {
@@ -31,6 +31,46 @@ class NotesControllers {
     });
 
     await knex("tags").insert(tagsOfThisNote);
+
+    return response.status(201).json({
+      status: 201,
+      message: "A nota foi cadastrada com sucesso.",
+    });
+  }
+
+  async update(request, response) {
+    const user_id = request.user.id;
+    const { id } = request.params;
+    const { title, description, rating, tags } = request.body;
+
+    dataChecker.isTheTitleOfTheNoteEmpty(title);
+    dataChecker.isANumber(rating);
+
+    const formattedTitle = title.trim();
+    const formattedDescription = description.trim();
+
+    await knex("notes").where({ id }).update({
+      title: formattedTitle,
+      description: formattedDescription,
+      rating,
+      user_id,
+    });
+
+    if (tags) {
+      const tagsOfThisNote = tags.map(tag => {
+        const formattedTag = tag.trim();
+
+        return {
+          note_id: id,
+          user_id,
+          name: formattedTag,
+        };
+      });
+
+      await knex("tags").where({ note_id: id }).delete();
+
+      await knex("tags").insert(tagsOfThisNote);
+    }
 
     return response.status(201).json({
       status: 201,
@@ -81,8 +121,8 @@ class NotesControllers {
 
     const tags = await knex("tags").where({ user_id });
 
-    const notesWithTags = notes.map((note) => {
-      const tagsOfThisNote = tags.filter((tag) => tag.note_id == note.id);
+    const notesWithTags = notes.map(note => {
+      const tagsOfThisNote = tags.filter(tag => tag.note_id == note.id);
 
       return {
         ...note,
